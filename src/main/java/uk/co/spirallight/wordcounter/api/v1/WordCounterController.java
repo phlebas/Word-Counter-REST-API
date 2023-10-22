@@ -20,9 +20,13 @@ public class WordCounterController {
   private final WordCounter wordCounter = new SimpleWordCounter();
 
   @PutMapping("/addwords")
-  public void putWords(@RequestParam String word, @RequestParam String... additionalWords) {
+  public void putWords(@RequestParam String word, @RequestParam(required = false) String... additionalWords) {
     try {
-      wordCounter.addWords(word, additionalWords);
+      if (additionalWords != null) {
+        wordCounter.addWords(word, additionalWords);
+      } else {
+        wordCounter.addWords(word);
+      }
     } catch (InvalidWordException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     }
