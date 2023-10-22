@@ -10,6 +10,8 @@ import uk.co.spirallight.wordcounter.exception.InvalidWordException;
 import uk.co.spirallight.wordcounter.service.SimpleWordCounter;
 import uk.co.spirallight.wordcounter.service.WordCounter;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/words")
 @RequiredArgsConstructor
@@ -20,12 +22,12 @@ public class WordCounterController {
   private final WordCounter wordCounter = new SimpleWordCounter();
 
   @PutMapping("/addwords")
-  public void putWords(@RequestParam String word, @RequestParam(required = false) String... additionalWords) {
+  public List<String> putWords(@RequestParam String word, @RequestParam(required = false) String... additionalWords) {
     try {
       if (additionalWords != null) {
-        wordCounter.addWords(word, additionalWords);
+        return wordCounter.addWords(word, additionalWords);
       } else {
-        wordCounter.addWords(word);
+        return wordCounter.addWords(word);
       }
     } catch (InvalidWordException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

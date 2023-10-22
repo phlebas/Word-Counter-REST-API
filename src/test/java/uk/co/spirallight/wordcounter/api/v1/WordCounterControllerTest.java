@@ -19,12 +19,17 @@ class WordCounterControllerTest {
   @Autowired
   private MockMvc mvc;
 
+  private final String addWordsResult = """ 
+      [ "word" ] 
+  """;
+
   @Test
   void putWords() throws Exception {
     mvc.perform(put("/api/v1/words/addwords")
             .param("word", "word")
             .param("additionalWords", ""))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(content().json(addWordsResult));
   }
 
   @Test
