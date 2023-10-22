@@ -1,5 +1,5 @@
 # Word Counter REST API
-First version of the API exposing the Word Counter library functions.
+First version of the API exposing the [Word Counter library](https://github.com/phlebas/WordCounter/blob/main/README.md) functions.
 
 The REST API is built as a Spring Boot application with a Swagger front end. 
 The [Project Lombok library](https://projectlombok.org/) is used to avoid boilerplate code. A plugin for IntelliJ is available 
